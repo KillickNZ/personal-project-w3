@@ -17,9 +17,11 @@ body {
     background-color: #fff;
     width: 55vw;
     height: 65vh;
-    margin: 0px auto;
+    margin: 30px auto;
     border-radius: 2rem;
-
+    overflow: scroll;
+    overscroll-behavior-y: contain;
+    scroll-snap-type: y proximity;
 }
 
 
@@ -34,6 +36,7 @@ body {
     height: 5rem;
     box-sizing: border-box;
     backdrop-filter: blur(10px);
+    
 }
 
 #input {
@@ -62,18 +65,24 @@ body {
     list-style-type: none;
     margin: 30px 2rem;
     padding: 10px 30px;
+    
+}
 
+#messages> li:last-child {
+    scroll-snap-align: end;
 }
 
 #messages>li {
     margin: 5px;
     text-align: end;
+    
 }
 #messages>li span {
     padding: 0.5rem 1rem;
     border-radius: 2rem;
     background-color: bisque;
     display: inline-block;
+    
 }
 
 #messages>li:nth-child(odd) {
