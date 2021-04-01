@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1 class="super-awesome-heading">Yea come ave a yarn mate</h1>
+    <div class="content-container">
+        <div class="message-container">
+            <ul id="messages"></ul>
+        </div>
+        
+        <div class="form-container">
+            <form id="form" action="">
+                <input id="input" autocomplete="off" />
+                <button>Send</button>
+            </form>
+        </div>
+        
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        var form = document.getElementById('form');
+        var input = document.getElementById('input');
+
+        // Send message
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (input.value) {
+                socket.emit('chat message', input.value);
+                input.value = '';
+            }
+        });
+        
+        //  Capture return message 
+        socket.on('chat message', function (msg) {
+            var item = document.createElement('li');
+            var subitem = document.createElement('span')
+            subitem.textContent = msg;
+            item.appendChild(subitem)
+            messages.appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+    </script>
+</body>
+
+</html>
